@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import './CraneSlider.css';
 
@@ -10,6 +10,7 @@ interface CraneSliderProps {
 export default function CraneSlider({ images, model }: CraneSliderProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [imageLoaded, setImageLoaded] = useState(false);
+    const sliderRef = useRef<HTMLDivElement>(null); // ← Добавляем ref
 
     const nextSlide = () => {
         setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -37,6 +38,16 @@ export default function CraneSlider({ images, model }: CraneSliderProps) {
         setImageLoaded(true);
     };
 
+    const toggleFullscreen = () => {
+        if (!sliderRef.current) return;
+
+        if (!document.fullscreenElement) {
+            sliderRef.current.requestFullscreen?.();
+        } else {
+            document.exitFullscreen?.();
+        }
+    };
+
     // Автопереключение (каждые 5 секунд)
     // useEffect(() => {
     //   if (images.length <= 1) return;
@@ -60,7 +71,7 @@ export default function CraneSlider({ images, model }: CraneSliderProps) {
     }
 
     return (
-        <div className="crane-slider">
+        <div className="crane-slider" ref = {sliderRef}>
             {/* Контейнер для изображения */}
             <div className="slider-container">
                 <div className="slider-image-wrapper">
@@ -130,14 +141,7 @@ export default function CraneSlider({ images, model }: CraneSliderProps) {
                         {/* Кнопка fullscreen (опционально) */}
                         <button
                             className="slider-fullscreen"
-                            onClick={() => {
-                                const elem = document.querySelector('.crane-slider');
-                                if (!document.fullscreenElement) {
-                                    elem?.requestFullscreen?.();
-                                } else {
-                                    document.exitFullscreen?.();
-                                }
-                            }}
+                            onClick={() => {toggleFullscreen()}}
                             aria-label="Полный экран"
                             type="button"
                         >
