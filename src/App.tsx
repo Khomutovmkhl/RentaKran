@@ -1,8 +1,10 @@
 import './index.css';
-import {Phone, MapPin} from 'lucide-react';
+import {MapPin} from 'lucide-react';
 import logo from "./assets/logo-icon-blue.jpg";
 import heroBg from "./assets/hero-bg.jpg";
+import PhoneLink from "./components/PhoneLink.tsx";
 import CraneSlider from "./components/CraneSlider";
+import UniversalLinkText from './components/UniversalLinkText';
 
 // Импорт ВСЕХ фото кранов
 import crane_kamaz_1 from "./assets/cranes/KAMAZ_1.jpg";
@@ -15,7 +17,8 @@ function App() {
         {id: 1, model: 'КАМАЗ КС-55729', capacity: '32', boom: '31', images: [crane_kamaz_1, crane_kamaz_2]},
         {id: 2, model: 'МАЗ КС-5576Б', capacity: '32', boom: '31', images: [crane_maz_1, crane_maz_2]}
     ];
-    const principalPhone: string = "+7 902 330-35-90";
+    const principalPhoneView: string = "+7 (4852) 90-35-90";
+    const principalPhone: string = "+7(4852)903590";
 
 
     return (
@@ -41,10 +44,9 @@ function App() {
                             <MapPin size={18}/>
                             <span>Ярославль</span>
                         </a>
-                        <a href="tel:+79023303590" className="phone-button">
-                            <Phone size={18}/>
-                            <span>{principalPhone}</span>
-                        </a>
+                        <PhoneLink phoneNumber={principalPhone}>
+                            {principalPhoneView}
+                        </PhoneLink>
                     </div>
                 </div>
             </header>
@@ -74,7 +76,7 @@ function App() {
                     <div className="cranes-grid">
                         {cranes.map(crane => (
                             <div key={crane.id} className="crane-card">
-                                <CraneSlider images={crane.images} model={crane.model} />
+                                <CraneSlider images={crane.images} model={crane.model}/>
 
                                 <div className="crane-info">
                                     <h3 className="crane-model">{crane.model}</h3>
@@ -95,7 +97,7 @@ function App() {
                                     <a
                                         href={`tel:${principalPhone}?text=Интересует кран ${crane.model}`}
                                         className="phone-button"
-                                        style={{ width: '100%', justifyContent: 'center' }}
+                                        style={{width: '100%', justifyContent: 'center'}}
                                     >
                                         Узнать цену и наличие
                                     </a>
@@ -112,26 +114,33 @@ function App() {
                     <h2 className="section-title">Контакты</h2>
                     <div className="contact-grid">
                         <div className="contact-card">
-                            <div className="contact-icon">📞</div>
-                            <h3>Телефон</h3>
-                            <p style={{fontSize: '1.5rem', fontWeight: 'bold', margin: '1rem 0'}}>
-                                {principalPhone}
-                            </p>
+                            <h2>Телефон</h2>
+                            <PhoneLink
+                                phoneNumber={principalPhone}
+                                style={{fontSize: '1.2rem', fontWeight: 'bold', margin: '1rem 0'}}>
+                                {principalPhoneView}
+                            </PhoneLink>
                             <p>Директор: Александр Михайлович Хомутов</p>
                         </div>
 
                         <div className="contact-card">
-                            <div className="contact-icon">📍</div>
-                            <h3>Адрес базы</h3>
+                            <h2>Адрес базы</h2>
+                            <div
+                                style={{margin: '1rem 0'}}
+                            >
+                                <UniversalLinkText
+                                    to="https://yandex.ru/maps/org/rentakran/1747997236/?ll=39.889682%2C57.578861&z=17"
+                                    hoverColor="#3b82f6"
+                                >
+                                    150066, Ярославская обл., Ярославль, ул. Леваневского, 71
+                                </UniversalLinkText>
+                            </div>
                             <p style={{margin: '1rem 0'}}>
-                                150066, Ярославская обл., Ярославль, ул. Леваневского, 71
-                            </p>
-                            <p>Работаем по всей области</p>
+                                Работаем по всей области</p>
                         </div>
 
                         <div className="contact-card">
-                            <div className="contact-icon">⏰</div>
-                            <h3>Режим работы</h3>
+                            <h2>Режим работы</h2>
                             <p style={{margin: '1rem 0'}}>
                                 Пн-Вс: круглосуточно
                             </p>
