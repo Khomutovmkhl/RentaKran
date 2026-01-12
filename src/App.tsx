@@ -7,18 +7,23 @@ import CraneSlider from "./components/CraneSlider";
 import UniversalLinkText from './components/UniversalLinkText';
 
 // Импорт ВСЕХ фото кранов
-import crane_kamaz_1 from "./assets/cranes/KAMAZ_1.jpg";
-import crane_kamaz_2 from "./assets/cranes/KAMAZ-2.jpg";
+import crane_kamaz_1 from "./assets/cranes/KAMAZ_1.png";
+import crane_kamaz_2 from "./assets/cranes/KAMAZ_2.png";
 import crane_maz_1 from "./assets/cranes/MAZ_1.jpg";
 import crane_maz_2 from "./assets/cranes/MAZ_2.jpg";
 
 function App() {
     const cranes = [
-        {id: 1, model: 'КАМАЗ КС-55729', capacity: '32', boom: '31', images: [crane_kamaz_1, crane_kamaz_2]},
+        {id: 1, model: 'КАМАЗ КС-55729-1В', capacity: '32', boom: '31', images: [crane_kamaz_1, crane_kamaz_2]},
         {id: 2, model: 'МАЗ КС-5576Б', capacity: '32', boom: '31', images: [crane_maz_1, crane_maz_2]}
     ];
-    const principalPhoneView: string = "+7 (4852) 90-35-90";
-    const principalPhone: string = "+7(4852)903590";
+    const principalPhoneView: string = "+7 902 330 35-90";
+    const principalPhone: string = "+79023303590";
+    const mail: string = "almh@bk.ru";
+    const legalName: string = "ООО «РентаКран»";
+    const ogrn: number = 1137604005560;
+    const inn: number = 7604241724;
+    const legalAddress: string = "обл. Ярославская, г. Ярославль, ул. Леваневского, д. 71";
 
 
     return (
@@ -152,10 +157,41 @@ function App() {
 
             {/* ===== ФУТЕР ===== */}
             <footer className="footer">
-                <div className="container">
-                    <p style={{fontSize: '1.2rem', marginBottom: '1rem'}}>РентаКран — аренда автокранов</p>
-                    <p>© {new Date().getFullYear()} Все права защищены</p>
-                    <p style={{marginTop: '1rem', opacity: 0.8}}>Ярославль, Россия</p>
+                <div className="footer-container">
+
+                    {/* Блок с основной информацией */}
+                    <div className="footer-main">
+                        <p style={{ fontSize: '1.2rem', marginBottom: '1rem', fontWeight: 'bold' }}>
+                            {legalName}
+                        </p>
+                        <p>© {new Date().getFullYear()} Все права защищены</p>
+                        <p style={{ marginTop: '1rem', opacity: 0.8 }}>Ярославль, Россия</p>
+                    </div>
+
+                    {/* Блок с реквизитами */}
+                    <div className="footer-legal">
+                        <p><strong>Реквизиты компании:</strong></p>
+                        <p>ОГРН: {ogrn}</p>
+                        <p>ИНН: {inn}</p>
+                        <p>Юр. адрес: {legalAddress}</p>
+                    </div>
+
+                    {/* Блок контактов */}
+                    <div className="footer-contact">
+                        <p><strong>Контакты:</strong></p>
+                        <p>
+                            Телефон:{' '}
+                            <a href={`tel:${principalPhone}`} style={{ color: '#ddd', textDecoration: 'none' }}>
+                                {principalPhoneView}
+                            </a>
+                        </p>
+                        <p>
+                            Email:{' '}
+                            <a href={`mailto:${mail}`} style={{ color: '#ddd', textDecoration: 'none' }}>
+                                {mail}
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </footer>
         </div>
