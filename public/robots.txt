@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://TODO твой-домен.ru/sitemap.xml
+Sitemap: https:rentakran76.ru/sitemap.xml
