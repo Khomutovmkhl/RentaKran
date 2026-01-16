@@ -1,34 +1,54 @@
+# Название workflow, отображается в интерфейсе GitHub
 name: Deploy to GitHub Pages
 
+# Условия запуска: при каждом пуше в ветку master
 on:
   push:
-    branches: [ "main" ] # Запускать при пуше в ветку main
+    branches: ['master']
 
+  # Разрешает запускать сборку вручную из вкладки Actions
+  workflow_dispatch:
+
+# Права доступа для токена сборки
 permissions:
-  contents: write # Даем права на запись для создания ветки gh-pages
+  contents: read
+  pages: write
+  id-token: write
 
+# Запрещает параллельные сборки, чтобы избежать конфликтов
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+# Определяем задание (job)
 jobs:
-  build-and-deploy:
+  deploy:
+    # Задаем среду для удобного отслеживания
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Запускаем на последней версии Ubuntu
     runs-on: ubuntu-latest
-
+    # Шаги, которые выполнит система
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-
+          node-version: 'lts/*'
+          cache: 'npm'
       - name: Install dependencies
         run: npm ci
-
       - name: Build project
         run: npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist # Публикуем папку со сборкой
-          # cname: rentakran76.ru # Раскомментируйте, если используете свой домен
+          # Загружаем для деплоя содержимое папки 'dist'
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
