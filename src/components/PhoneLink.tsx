@@ -22,12 +22,9 @@ const PhoneLink: React.FC<PhoneLinkProps> = ({
     const [isCopied] = useState(false);
 
     // Функция обработки клика
-    const handleClick = async (e: React.MouseEvent) => {
-        e.preventDefault();
-        setIsActive(true);
-
-        // ... код обработки звонка/копирования
-
+    const handleClick = () => {
+        setIsActive(true); // Анимация сработает
+        // Браузер сам перейдет по href="tel:..."
         setTimeout(() => setIsActive(false), 200);
     };
 

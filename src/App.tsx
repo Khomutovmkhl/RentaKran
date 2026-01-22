@@ -97,15 +97,23 @@ function App() {
                                             <span>{crane.boom}</span>
                                         </li>
                                     </ul>
+                                    <div style={{display: 'flex', gap: '10px'}}>
+                                        {/* Кнопка ЗВОНКА */}
+                                        <a href={`tel:${principalPhone}`}
+                                           className="phone-button"
+                                           style={{width: '100%', justifyContent: 'center'}}>
+                                            Позвонить
+                                        </a>
 
-                                    {/* Кнопка */}
-                                    <a
-                                        href={`tel:${principalPhone}?text=Интересует кран ${crane.model}`}
-                                        className="phone-button"
-                                        style={{width: '100%', justifyContent: 'center'}}
-                                    >
-                                        Узнать цену и наличие
-                                    </a>
+                                        {/* Кнопка SMS */}
+                                        <a
+                                            href={`sms:${principalPhone}?text=${encodeURIComponent(`Интересует кран ${crane.model}`)}\nКакая цена и минималка?`}
+                                            className="sms-button"
+                                            style={{width: '100%', justifyContent: 'center'}}
+                                        >
+                                            Написать
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         ))}
@@ -161,11 +169,11 @@ function App() {
 
                     {/* Блок с основной информацией */}
                     <div className="footer-main">
-                        <p style={{ fontSize: '1.2rem', marginBottom: '1rem', fontWeight: 'bold' }}>
+                        <p style={{fontSize: '1.2rem', marginBottom: '1rem', fontWeight: 'bold'}}>
                             {legalName}
                         </p>
                         <p>© {new Date().getFullYear()} Все права защищены</p>
-                        <p style={{ marginTop: '1rem', opacity: 0.8 }}>Ярославль, Россия</p>
+                        <p style={{marginTop: '1rem', opacity: 0.8}}>Ярославль, Россия</p>
                     </div>
 
                     {/* Блок с реквизитами */}
@@ -181,13 +189,13 @@ function App() {
                         <p><strong>Контакты:</strong></p>
                         <p>
                             Телефон:{' '}
-                            <a href={`tel:${principalPhone}`} style={{ color: '#ddd', textDecoration: 'none' }}>
+                            <a href={`tel:${principalPhone}`} style={{color: '#ddd', textDecoration: 'none'}}>
                                 {principalPhoneView}
                             </a>
                         </p>
                         <p>
                             Email:{' '}
-                            <a href={`mailto:${mail}`} style={{ color: '#ddd', textDecoration: 'none' }}>
+                            <a href={`mailto:${mail}`} style={{color: '#ddd', textDecoration: 'none'}}>
                                 {mail}
                             </a>
                         </p>

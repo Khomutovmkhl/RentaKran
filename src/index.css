@@ -125,6 +125,26 @@ body {
     box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
 }
 
+.sms-button {
+    background: #f97316;
+    color: white;
+    padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.8rem, 2vw, 1.2rem);
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+    white-space: nowrap;
+}
+
+.sms-button:hover {
+    background: #ea580c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
 /* ===== ГЕРОЙ-СЕКЦИЯ ===== */
 .hero {
     color: white;
