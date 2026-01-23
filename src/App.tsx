@@ -5,6 +5,7 @@ import heroBg from "./assets/hero-bg.jpg";
 import PhoneLink from "./components/PhoneLink.tsx";
 import CraneSlider from "./components/CraneSlider";
 import UniversalLinkText from './components/UniversalLinkText';
+import CookieBanner from './components/CookieBanner';
 
 // Импорт ВСЕХ фото кранов
 import crane_kamaz_1 from "./assets/cranes/KAMAZ_1.png";
@@ -202,6 +203,7 @@ function App() {
                     </div>
                 </div>
             </footer>
+            <CookieBanner />
         </div>
     );
 }
