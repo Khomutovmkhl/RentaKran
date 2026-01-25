@@ -15,8 +15,15 @@ import crane_maz_2 from "./assets/cranes/MAZ_2.jpg";
 
 function App() {
     const cranes = [
-        {id: 1, model: 'КАМАЗ КС-55729-1В', capacity: '32', boom: '31', images: [crane_kamaz_1, crane_kamaz_2]},
-        {id: 2, model: 'МАЗ КС-5576Б', capacity: '32', boom: '31', images: [crane_maz_1, crane_maz_2]}
+        {
+            id: 1,
+            model: 'КАМАЗ КС-55729-1В',
+            capacity: '32',
+            boom: '31',
+            images: [crane_kamaz_1, crane_kamaz_2],
+            price: 3000
+        },
+        {id: 2, model: 'МАЗ КС-5576Б', capacity: '32', boom: '31', images: [crane_maz_1, crane_maz_2], price: 3000}
     ];
     const principalPhoneView: string = "+7 902 330 35-90";
     const principalPhone: string = "+79023303590";
@@ -60,6 +67,7 @@ function App() {
             {/* ===== ГЛАВНЫЙ ЭКРАН ===== */}
             <section
                 className="hero"
+                fetchPriority="high"  // Атрибут для браузера (SEO/LCP)
                 style={{
                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${heroBg})`,
                     backgroundSize: 'cover',
@@ -68,7 +76,7 @@ function App() {
                 }}
             >
                 <div className="container">
-                    <h1 className="hero-title">Аренда автокранов в Ярославле</h1>
+                    <h1 className="hero-title">Аренда автокрана в Ярославле от 3000 руб/час</h1>
                     <p className="hero-subtitle">
                         Профессиональная техника, опытные операторы, гибкие условия аренды.
                     </p>
@@ -78,54 +86,63 @@ function App() {
             {/* ===== КАТАЛОГ КРАНОВ ===== */}
             <section id="cranes" className="section">
                 <div className="container">
-                    <h2 className="section-title">Наши краны</h2>
+                    <h2 className="section-title">Каталог автокранов в аренду</h2>
                     <div className="cranes-grid">
                         {cranes.map(crane => (
-                            <div key={crane.id} className="crane-card">
+                            <article
+                                key={crane.id}
+                                className="crane-card"
+                                itemScope
+                                itemType="https://schema.org">
+                                <meta itemProp="name" content={`Аренда автокрана ${crane.model}`}/>
+                                <meta itemProp="description"
+                                      content={`Услуги автокрана ${crane.capacity} тонн с вылетом стрелы ${crane.boom} метров в Ярославле.`}/>
+
                                 <CraneSlider images={crane.images} model={crane.model}/>
 
                                 <div className="crane-info">
                                     <h3 className="crane-model">{crane.model}</h3>
-
-                                    {/* Характеристики */}
                                     <ul className="crane-specs">
-                                        <li>
-                                            <strong>Грузоподъёмность, т:</strong>
-                                            <span>{crane.capacity}</span>
+                                        <li itemProp="additionalProperty" itemScope itemType="https://schema.org">
+                                            <strong itemProp="name">Грузоподъёмность, т:</strong>
+                                            <span itemProp="value">{crane.capacity}</span>
                                         </li>
-                                        <li>
-                                            <strong>Вылет стрелы, м:</strong>
-                                            <span>{crane.boom}</span>
+                                        <li itemProp="additionalProperty" itemScope itemType="https://schema.org">
+                                            <strong itemProp="name">Вылет стрелы, м:</strong>
+                                            <span itemProp="value">{crane.boom}</span>
                                         </li>
                                     </ul>
-                                    <div style={{display: 'flex', gap: '10px'}}>
-                                        {/* Кнопка ЗВОНКА */}
-                                        <a href={`tel:${principalPhone}`}
-                                           className="phone-button"
-                                           style={{width: '100%', justifyContent: 'center'}}>
-                                            Позвонить
-                                        </a>
 
-                                        {/* Кнопка SMS */}
-                                        <a
-                                            href={`sms:${principalPhone}?text=${encodeURIComponent(`Интересует кран ${crane.model}`)}\nКакая цена и минималка?`}
-                                            className="sms-button"
-                                            style={{width: '100%', justifyContent: 'center'}}
-                                        >
-                                            Написать
-                                        </a>
+                                    <div itemProp="offers" itemScope itemType="https://schema.org">
+                                        <meta itemProp="price" content={`${crane.price}`}/>
+                                        <meta itemProp="priceCurrency" content="RUB"/>
+                                        <link itemProp="availability" href="https://schema.org"/>
+                                    </div>
+
+                                    <div style={{display: 'flex', gap: '10px'}}>
+                                        <a href={`tel:${principalPhone}`} className="phone-button"
+                                           style={{width: '100%', justifyContent: 'center'}}>Позвонить</a>
+                                        <a href={`sms:${principalPhone}?text=${encodeURIComponent(`Интересует кран ${crane.model}`)}`}
+                                           className="sms-button"
+                                           style={{width: '100%', justifyContent: 'center'}}>Написать</a>
                                     </div>
                                 </div>
-                            </div>
+                            </article>
                         ))}
                     </div>
                 </div>
             </section>
 
             {/* ===== КОНТАКТЫ ===== */}
-            <section id="contacts" className="section contacts">
+            <section
+                id="contacts"
+                className="section contacts"
+                itemScope
+                itemType="https://schema.org"
+            >
+                <meta itemProp="name" content={legalName}/>
                 <div className="container">
-                    <h2 className="section-title">Контакты</h2>
+                    <h3 className="section-title">Контактная информация и адрес</h3>
                     <div className="contact-grid">
                         <div className="contact-card">
                             <h2>Телефон</h2>
@@ -137,27 +154,22 @@ function App() {
                             <p>Директор: Александр Михайлович Хомутов</p>
                         </div>
 
-                        <div className="contact-card">
+                        <div className="contact-card" itemProp="address" itemScope itemType="https://schema.org">
                             <h2>Адрес базы</h2>
-                            <div
-                                style={{margin: '1rem 0'}}
-                            >
-                                <UniversalLinkText
-                                    to="https://yandex.ru/maps/org/rentakran/1747997236/?ll=39.889682%2C57.578861&z=17"
-                                    hoverColor="#3b82f6"
-                                >
-                                    150066, Ярославская обл., Ярославль, ул. Леваневского, 71
+                            <div style={{margin: '1rem 0'}}>
+                                <UniversalLinkText to="https://yandex.ru...">
+                                    <span itemProp="streetAddress">{legalAddress}</span>
                                 </UniversalLinkText>
                             </div>
+                            <meta itemProp="addressLocality" content="Ярославль" />
                             <p style={{margin: '1rem 0'}}>
                                 Работаем по всей области</p>
                         </div>
 
                         <div className="contact-card">
                             <h2>Режим работы</h2>
-                            <p style={{margin: '1rem 0'}}>
-                                Пн-Вс: круглосуточно
-                            </p>
+                            <meta itemProp="openingHours" content="Mo-Su 00:00-24:00" />
+                            <p style={{margin: '1rem 0'}}>Пн-Вс: круглосуточно</p>
                             <p>Срочная подача техники</p>
                         </div>
                     </div>
@@ -203,7 +215,7 @@ function App() {
                     </div>
                 </div>
             </footer>
-            <CookieBanner />
+            <CookieBanner/>
         </div>
     );
 }
