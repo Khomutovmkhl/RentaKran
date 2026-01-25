@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type SyntheticEvent } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Gallery, Item } from 'react-photoswipe-gallery';
 import 'photoswipe/dist/photoswipe.css';
@@ -23,7 +23,7 @@ export default function CraneSlider({ images, model }: CraneSliderProps) {
         setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
     };
 
-    const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const handleImageLoad = (e: SyntheticEvent<HTMLImageElement>) => {
         const img = e.currentTarget;
         const isLandscape = img.naturalWidth > img.naturalHeight;
 
@@ -61,30 +61,31 @@ export default function CraneSlider({ images, model }: CraneSliderProps) {
                             >
                                 {({ ref, open }) => (
                                     <img
+                                        // ИСПРАВЛЕННЫЙ REF БЕЗ ANY
                                         ref={(node) => {
-                                            // Если это текущая картинка и она уже в кеше
                                             if (index === currentIndex && node?.complete && !imageLoaded) {
                                                 setImageLoaded(true);
                                             }
-                                            // Передаем ref в Photoswipe (обязательно для всех элементов!)
-                                            if (typeof ref === 'function') ref(node);
-                                            else if (ref) (ref as any).current = node;
+
+                                            // Корректная обработка типов PhotoSwipe Ref
+                                            if (typeof ref === 'function') {
+                                                ref(node);
+                                            } else if (ref && 'current' in ref) {
+                                                (ref as React.MutableRefObject<HTMLImageElement | null>).current = node;
+                                            }
                                         }}
                                         onClick={open}
                                         src={imgUrl}
                                         alt={`${model} - фото ${index + 1}`}
-                                        // Оставляем класс loaded только для текущей активной картинки
                                         className={`slider-image ${index === currentIndex && imageLoaded ? 'loaded' : 'loading'}`}
-                                        // Запускаем handleImageLoad только для текущей картинки
                                         onLoad={index === currentIndex ? handleImageLoad : undefined}
                                         style={{
                                             cursor: 'zoom-in',
-                                            // ВАЖНО: не return null, а display: none
                                             display: index === currentIndex ? 'block' : 'none'
                                         }}
                                         onError={(e) => {
                                             if (index === currentIndex) setImageLoaded(true);
-                                            e.currentTarget.src = 'data:image/svg+xml,...';
+                                            e.currentTarget.src = 'data:image/svg+xml,<svg xmlns="https://www.w3.org" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8fafc"/><text x="50" y="60" font-family="Arial" font-size="14" fill="%2394a3b8" text-anchor="middle">Ошибка</text></svg>';
                                         }}
                                     />
                                 )}
