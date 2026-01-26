@@ -111,6 +111,10 @@ function App() {
                                             <strong itemProp="name">Вылет стрелы, м:</strong>
                                             <span itemProp="value">{crane.boom}</span>
                                         </li>
+                                        <li itemProp="additionalProperty" itemScope itemType="https://schema.org">
+                                            <strong itemProp="name">Цена аренды, р/час:</strong>
+                                            <span itemProp="value">{crane.price}</span>
+                                        </li>
                                     </ul>
 
                                     <div itemProp="offers" itemScope itemType="https://schema.org">
@@ -161,14 +165,14 @@ function App() {
                                     <span itemProp="streetAddress">{legalAddress}</span>
                                 </UniversalLinkText>
                             </div>
-                            <meta itemProp="addressLocality" content="Ярославль" />
+                            <meta itemProp="addressLocality" content="Ярославль"/>
                             <p style={{margin: '1rem 0'}}>
                                 Работаем по всей области</p>
                         </div>
 
                         <div className="contact-card">
                             <h2>Режим работы</h2>
-                            <meta itemProp="openingHours" content="Mo-Su 00:00-24:00" />
+                            <meta itemProp="openingHours" content="Mo-Su 00:00-24:00"/>
                             <p style={{margin: '1rem 0'}}>Пн-Вс: круглосуточно</p>
                             <p>Срочная подача техники</p>
                         </div>
