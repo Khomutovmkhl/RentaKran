@@ -1,16 +1,16 @@
 import './index.css';
 import {MapPin} from 'lucide-react';
-import logo from "./assets/logo-icon-blue.jpg";
-import heroBg from "./assets/hero-bg.jpg";
+import logo from "./assets/logo-icon-blue.webp";
+import heroBg from "./assets/hero-bg.webp";
 import PhoneLink from "./components/PhoneLink.tsx";
 import CraneSlider from "./components/CraneSlider";
 import CookieBanner from './components/CookieBanner';
 
 // Импорт ВСЕХ фото кранов
-import crane_kamaz_1 from "./assets/cranes/KAMAZ_1.png";
-import crane_kamaz_2 from "./assets/cranes/KAMAZ_2.png";
-import crane_maz_1 from "./assets/cranes/MAZ_1.jpg";
-import crane_maz_2 from "./assets/cranes/MAZ_2.jpg";
+import crane_kamaz_1 from "./assets/cranes/KAMAZ_1.webp";
+import crane_kamaz_2 from "./assets/cranes/KAMAZ_2.webp";
+import crane_maz_1 from "./assets/cranes/MAZ_1.webp";
+import crane_maz_2 from "./assets/cranes/MAZ_2.webp";
 import YandexMap from "./components/YandexMap.tsx";
 
 function App() {
