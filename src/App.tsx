@@ -4,7 +4,6 @@ import logo from "./assets/logo-icon-blue.jpg";
 import heroBg from "./assets/hero-bg.jpg";
 import PhoneLink from "./components/PhoneLink.tsx";
 import CraneSlider from "./components/CraneSlider";
-import UniversalLinkText from './components/UniversalLinkText';
 import CookieBanner from './components/CookieBanner';
 
 // Импорт ВСЕХ фото кранов
@@ -12,6 +11,7 @@ import crane_kamaz_1 from "./assets/cranes/KAMAZ_1.png";
 import crane_kamaz_2 from "./assets/cranes/KAMAZ_2.png";
 import crane_maz_1 from "./assets/cranes/MAZ_1.jpg";
 import crane_maz_2 from "./assets/cranes/MAZ_2.jpg";
+import YandexMap from "./components/YandexMap.tsx";
 
 function App() {
     const cranes = [
@@ -158,23 +158,18 @@ function App() {
                             <p>Директор: Александр Михайлович Хомутов</p>
                         </div>
 
-                        <div className="contact-card" itemProp="address" itemScope itemType="https://schema.org">
-                            <h2>Адрес базы</h2>
-                            <div style={{margin: '1rem 0'}}>
-                                <UniversalLinkText to="https://yandex.ru...">
-                                    <span itemProp="streetAddress">{legalAddress}</span>
-                                </UniversalLinkText>
-                            </div>
+                        <div className="contact-card" style={{padding: 0, overflow: 'hidden', display: 'flex'}}>
+                            <YandexMap/>
                             <meta itemProp="addressLocality" content="Ярославль"/>
-                            <p style={{margin: '1rem 0'}}>
-                                Работаем по всей области</p>
                         </div>
+                        <meta itemProp="addressLocality" content="Ярославль"/>
 
                         <div className="contact-card">
                             <h2>Режим работы</h2>
                             <meta itemProp="openingHours" content="Mo-Su 00:00-24:00"/>
                             <p style={{margin: '1rem 0'}}>Пн-Вс: круглосуточно</p>
-                            <p>Срочная подача техники</p>
+                            <p style={{margin: '1rem 0'}}>
+                                Работаем по всей области</p>
                         </div>
                     </div>
                 </div>
