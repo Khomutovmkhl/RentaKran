@@ -155,7 +155,7 @@ function App() {
                                 style={{fontSize: '1.2rem', fontWeight: 'bold', margin: '1rem 0'}}>
                                 {principalPhoneView}
                             </PhoneLink>
-                            <p>Директор: Александр Михайлович Хомутов</p>
+                            <p>Директор: Хомутов Александр Михайлович</p>
                         </div>
 
                         <div className="contact-card" style={{padding: 0, overflow: 'hidden', display: 'flex'}}>
